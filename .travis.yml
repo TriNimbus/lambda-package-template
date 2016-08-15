@@ -1,0 +1,22 @@
+language: python
+python:
+  - '2.7'
+install: make init
+script: make test
+
+env:
+  # Encrypt environment variables for the Travis environment using the Travis CLI.
+  # To deploy, we need AWS credentials, and an ARN to deploy to.
+  #
+  #    travis encrypt \
+  #        AWS_ACCESS_KEY_ID=key \
+  #        AWS_SECRET_ACCESS_KEY=secret \
+  #        ARN=arn:aws:lambda:us-west-2:111111111111:function:my-function-name
+  #
+  - secure: "npoPDQzcKcc79rBxTDJuvvfqzHdwwxmDAF6h6QH5w/XBN7ZYfhC0CGZk4JBsgbn9gazXjKE/IcpZRgFTeUhJrEkxS1vndVc8pSx2SP/iQzCms/F00NdrnIxpRRNBhrvoHdfhjlGha67Gt9pd9mj0GVYiNZtVLwwkH3RIOT8tnHNWAphjRHqTPLngkTXPfzktmfGJvFQsn29QiCifV/ZQcK4eoOfRuLO8eaH/y85/NfUKxeuXhXGE80I3LbBsnyMxS5ubw0H+Hblyx7rWkjGLuuyXBSxuR39ZIUYt9FYgaxvBdVdezMTRxCgUKFbnHAcPO7cx6c5O6yCnlkPZ8IFC+ghLier6/hZ1z1p3Hsp3t0eSNp4p+MPxgnqJuE4ud0kjKQhkqT6gnHgRtX2cHPt7v30dRutAxfLu1Ejb4VXDm3oDNDEuYipO10DEmB6xuKkcXQp2errTzrYDw4xZZK+35H+DjQQvcy5IDEya/J3knW6VY0LW7noKBtPWDP5xiqsOR3BwaBejoV9TSNUcKEooaWDi6VWOzNhIaOPuBXP9oeslLEK0ryc2JHGtimgR0WFzaJhlUJJ919uJgKyLWhZ2Dl+QspGfl7cN9/ZG3y2q1WxCYf1sseNqWAHrjhDoMxNbGLskvXZBgjCnffOIfTwURQ5grMK0EcsWlSuSXK+Wo9Y="
+
+deploy:
+  provider: script
+  script: make deploy
+  on:
+    branch: release
